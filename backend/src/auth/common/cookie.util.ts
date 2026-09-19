@@ -3,7 +3,7 @@ import type { Response, CookieOptions } from 'express';
 export const COOKIE_NAME = 'jwt';
 
 export function getCookieOptions(): CookieOptions {
-  const isProduction = process.env.NODE_ENV === 'production';
+  const isProduction = process.env.NODE_ENV === 'production' || Boolean(process.env.RENDER);
 
   return {
     httpOnly: true,
@@ -19,7 +19,7 @@ export function setAuthCookie(res: Response, token: string): void {
 }
 
 export function clearAuthCookie(res: Response): void {
-  const isProduction = process.env.NODE_ENV === 'production';
+  const isProduction = process.env.NODE_ENV === 'production' || Boolean(process.env.RENDER);
   res.clearCookie(COOKIE_NAME, {
     httpOnly: true,
     secure: isProduction,

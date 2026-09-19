@@ -25,6 +25,18 @@ interface AuthContextType {
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
+function setSessionCookie() {
+  if (typeof document !== 'undefined') {
+    document.cookie = 'auth_session=true; path=/; max-age=604800; SameSite=Lax';
+  }
+}
+
+function clearSessionCookie() {
+  if (typeof document !== 'undefined') {
+    document.cookie = 'auth_session=; path=/; max-age=0; SameSite=Lax';
+  }
+}
+
 export function AuthProvider({ children }: { children: React.ReactNode }) {
   const [user, setUser] = useState<User | null>(null);
   const [loading, setLoading] = useState<boolean>(true);
@@ -35,11 +47,14 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
       const res = await apiFetch<{ user: User }>('/auth/me');
       if (res && res.user) {
         setUser(res.user);
+        setSessionCookie();
       } else {
         setUser(null);
+        clearSessionCookie();
       }
     } catch {
       setUser(null);
+      clearSessionCookie();
     } finally {
       setLoading(false);
     }
@@ -54,6 +69,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
       data: { email, password },
     });
     setUser(res.user);
+    setSessionCookie();
     router.push('/dashboard');
   };
 
@@ -62,6 +78,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
       data: { name, email, password },
     });
     setUser(res.user);
+    setSessionCookie();
     router.push('/dashboard');
   };
 
@@ -71,6 +88,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     } catch {
       // Proceed even if server request fails
     } finally {
+      clearSessionCookie();
       setUser(null);
       router.push('/login');
     }
@@ -89,6 +107,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     await apiFetch('/users/me', {
       method: 'DELETE',
     });
+    clearSessionCookie();
     setUser(null);
     router.push('/login');
   };

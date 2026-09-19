@@ -3,9 +3,9 @@ import type { NextRequest } from 'next/server';
 
 export function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl;
-  const token = request.cookies.get('jwt')?.value;
+  const token = request.cookies.get('jwt')?.value || request.cookies.get('auth_session')?.value;
 
-  // 1. If accessing protected routes without cookie, redirect to /login
+  // 1. If accessing protected routes without cookie/session, redirect to /login
   if (pathname.startsWith('/dashboard')) {
     if (!token) {
       const loginUrl = new URL('/login', request.url);
@@ -14,7 +14,7 @@ export function middleware(request: NextRequest) {
     }
   }
 
-  // 2. If accessing auth pages (/login or /register) with active cookie, redirect to /dashboard
+  // 2. If accessing auth pages (/login or /register) with active session, redirect to /dashboard
   if (pathname === '/login' || pathname === '/register') {
     if (token) {
       return NextResponse.redirect(new URL('/dashboard', request.url));
