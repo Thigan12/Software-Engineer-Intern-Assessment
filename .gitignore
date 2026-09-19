@@ -41,6 +41,6 @@ Thumbs.db
 coverage/
 backend/coverage/
 
-# Confidential interview guide (Do not push to Git)
-Technical_Interview_Preparation_Guide.pdf
+# Local docs and scripts
+*.pdf
 scripts/

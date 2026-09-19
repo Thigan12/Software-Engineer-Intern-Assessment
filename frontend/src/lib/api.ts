@@ -15,8 +15,7 @@ export async function apiFetch<T = any>(endpoint: string, options: RequestOption
       'Content-Type': 'application/json',
       ...headers,
     },
-    // CRITICAL: credentials: 'include' enables browser to transmit and accept
-    // HTTP-only cookies across origins (Vercel <-> Render) and localhost
+    // Send cookies on cross-origin requests
     credentials: 'include',
     ...customConfig,
   };
