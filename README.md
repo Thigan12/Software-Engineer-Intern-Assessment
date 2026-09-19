@@ -22,8 +22,8 @@ A minimal, robust full-stack application built for the Software Engineer Intern 
 ```
 
 ## Live Deployment Links
-- **Frontend (Vercel)**: `To be added after deployment`
-- **Backend (Render)**: `To be added after deployment`
+- **Frontend (Vercel)**: [https://software-engineer-intern-assessment.vercel.app](https://software-engineer-intern-assessment.vercel.app)
+- **Backend (Render)**: [https://software-engineer-intern-assessment.onrender.com](https://software-engineer-intern-assessment.onrender.com)
 
 ## Local Development Setup
 
