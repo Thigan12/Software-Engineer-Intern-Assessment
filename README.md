@@ -9,6 +9,14 @@ A minimal full-stack application with user authentication and user CRUD operatio
 - **Frontend (Vercel):** [https://software-engineer-intern-assessment.vercel.app](https://software-engineer-intern-assessment.vercel.app)
 - **Backend (Render):** [https://software-engineer-intern-assessment.onrender.com](https://software-engineer-intern-assessment.onrender.com)
 
+### Deployment Previews
+
+#### Vercel Production Deployment (Frontend)
+![Vercel Production Deployment](docs/screenshots/vercel-deployment.png)
+
+#### Render Web Service Deployment (Backend)
+![Render Web Service Deployment](docs/screenshots/render-deployment.png)
+
 ---
 
 ## Tech Stack
