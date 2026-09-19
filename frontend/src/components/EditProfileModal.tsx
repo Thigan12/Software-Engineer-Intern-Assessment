@@ -2,7 +2,6 @@
 
 import React, { useState, useEffect } from 'react';
 import { useAuth } from '../context/AuthContext';
-import { X, Check, AlertCircle } from 'lucide-react';
 
 interface EditProfileModalProps {
   isOpen: boolean;
@@ -53,69 +52,67 @@ export default function EditProfileModal({ isOpen, onClose, onSuccess }: EditPro
   };
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center bg-slate-900/50 backdrop-blur-xs p-4 animate-in fade-in duration-200">
-      <div className="bg-white rounded-2xl max-w-md w-full p-6 shadow-xl border border-slate-100">
-        <div className="flex items-center justify-between pb-4 border-b border-slate-100">
-          <h3 className="text-lg font-bold text-slate-900">Edit Profile</h3>
+    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40 p-4">
+      <div className="bg-white rounded-xl max-w-md w-full p-6 shadow-lg border border-gray-200">
+        <div className="flex items-center justify-between pb-3 border-b border-gray-100">
+          <h3 className="text-lg font-semibold text-gray-900">Edit Profile</h3>
           <button
             onClick={onClose}
-            className="text-slate-400 hover:text-slate-600 p-1 rounded-lg hover:bg-slate-100 transition"
+            className="text-gray-400 hover:text-gray-600 text-sm font-medium"
           >
-            <X className="w-5 h-5" />
+            ✕
           </button>
         </div>
 
         {error && (
-          <div className="mt-4 p-3 rounded-lg bg-red-50 border border-red-200 text-red-700 text-sm flex items-start gap-2.5">
-            <AlertCircle className="w-4 h-4 mt-0.5 shrink-0" />
-            <span>{error}</span>
+          <div className="mt-4 p-3 rounded-md bg-red-50 border border-red-200 text-red-700 text-sm">
+            {error}
           </div>
         )}
 
-        <form onSubmit={handleSubmit} className="mt-4 space-y-4">
+        <form onSubmit={handleSubmit} autoComplete="off" className="mt-4 space-y-4">
           <div>
-            <label className="block text-xs font-semibold text-slate-700 uppercase tracking-wider mb-1.5">
+            <label className="block text-sm font-medium text-gray-700 mb-1">
               Full Name
             </label>
             <input
               type="text"
               required
+              autoComplete="off"
               value={name}
               onChange={(e) => setName(e.target.value)}
-              className="w-full px-3.5 py-2.5 rounded-lg border border-slate-300 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-slate-900 text-sm transition"
-              placeholder="Your full name"
+              className="w-full px-3 py-2 rounded-lg border border-gray-300 text-sm text-gray-900 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
             />
           </div>
 
           <div>
-            <label className="block text-xs font-semibold text-slate-700 uppercase tracking-wider mb-1.5">
+            <label className="block text-sm font-medium text-gray-700 mb-1">
               Email Address
             </label>
             <input
               type="email"
               required
+              autoComplete="off"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              className="w-full px-3.5 py-2.5 rounded-lg border border-slate-300 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-slate-900 text-sm transition"
-              placeholder="name@example.com"
+              className="w-full px-3 py-2 rounded-lg border border-gray-300 text-sm text-gray-900 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
             />
           </div>
 
-          <div className="pt-3 flex items-center justify-end gap-3">
+          <div className="pt-2 flex items-center justify-end gap-3">
             <button
               type="button"
               onClick={onClose}
-              className="px-4 py-2 text-sm font-medium text-slate-700 hover:bg-slate-100 rounded-lg transition"
+              className="px-3.5 py-1.5 text-sm font-medium text-gray-700 hover:bg-gray-50 rounded-md border border-gray-300 transition"
             >
               Cancel
             </button>
             <button
               type="submit"
               disabled={loading}
-              className="inline-flex items-center gap-1.5 px-4 py-2 text-sm font-semibold text-white bg-blue-600 hover:bg-blue-700 rounded-lg shadow-sm shadow-blue-500/20 transition disabled:opacity-50"
+              className="px-3.5 py-1.5 text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 rounded-md transition disabled:opacity-50"
             >
-              <Check className="w-4 h-4" />
-              <span>{loading ? 'Saving...' : 'Save Changes'}</span>
+              {loading ? 'Saving...' : 'Save'}
             </button>
           </div>
         </form>

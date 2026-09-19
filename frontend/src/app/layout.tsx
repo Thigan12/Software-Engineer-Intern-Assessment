@@ -3,8 +3,8 @@ import './globals.css';
 import { AuthProvider } from '../context/AuthContext';
 
 export const metadata: Metadata = {
-  title: 'UserHub — Full-Stack Auth & CRUD Portal',
-  description: 'Full-stack user authentication and CRUD application with JWT HTTP-only cookies and NestJS API',
+  title: 'User Dashboard',
+  description: 'User authentication and management',
 };
 
 export default function RootLayout({
